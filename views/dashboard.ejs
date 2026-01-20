@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+<h3>Dashboard</h3>
+<p>Login sebagai: <%= user.username %> (Role: <%= user.role %>)</p>
+
+<% if (user.role==='manager'){ %>
+<a href="/add" class="btn btn-success mb-3">Tambah Barang</a>
+<% } %>
+
+<table class="table table-bordered table-striped">
+<thead class="table-dark">
+<tr><th>Nama</th><th>Kategori</th><th>Harga</th><th>Stok</th><th>Min Stok</th><th>Lokasi</th><th>Aksi</th></tr>
+</thead>
+<tbody>
+<% items.forEach(i=>{ 
+   let rowClass = i.stock_qty<=i.min_stock ? (i.stock_qty<=i.min_stock/2 ? 'table-danger' : 'table-warning') : '';
+%>
+<tr class="<%= rowClass %>">
+<td><%= i.item_name %></td>
+<td><%= i.category %></td>
+<td>Rp <%= i.price %></td>
+<td><%= i.stock_qty %></td>
+<td><%= i.min_stock %></td>
+<td><%= i.storage_location %></td>
+<td>
+<a href="/edit/<%= i.id %>" class="btn btn-sm btn-primary">Edit</a>
+<% if(user.role==='manager'){ %>
+<form action="/delete/<%= i.id %>" method="POST" style="display:inline">
+<button class="btn btn-sm btn-danger" onclick="return confirm('Discontinue barang ini?')">Hapus</button>
+</form>
+<% } %>
+</td>
+</tr>
+<% }) %>
+</tbody>
+</table>
+</body>
+</html>
