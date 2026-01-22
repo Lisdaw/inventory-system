@@ -1,5 +1,6 @@
+```
 inventory-system/
-├─ controllers/
+├─   controllers/
 │   ├─ authController.js
 │   └─ itemController.js
 ├─ middlewares/
@@ -27,6 +28,7 @@ inventory-system/
 ├─ app.js
 ├─ package.json
 └─ README.md
+```
 
 Clone repository:
 git clone <repository-url>
