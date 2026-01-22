@@ -2,11 +2,16 @@ const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
   const token = req.cookies.token;
-  if (!token) return res.redirect('/login');
+
+  if (!token) {
+    return res.redirect('/login');
+  }
+
   try {
-    req.user = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
     next();
-  } catch {
-    res.redirect('/login');
+  } catch (err) {
+    return res.redirect('/login');
   }
 };

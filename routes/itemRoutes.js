@@ -4,7 +4,7 @@ const itemController = require('../controllers/itemController');
 const verifyToken = require('../middlewares/verifyToken');
 const { managerOnly } = require('../middlewares/roleAccess');
 
-router.get('/dashboard', verifyToken, itemController.dashboard);
+router.get('/', verifyToken, itemController.dashboard);
 router.get('/add', verifyToken, managerOnly, itemController.formAdd);
 router.post('/add', verifyToken, managerOnly, itemController.createItem);
 router.get('/edit/:id', verifyToken, itemController.formEdit);
