@@ -29,23 +29,28 @@ inventory-system/
 ├─ package.json
 └─ README.md
 ```
-
+```
 Clone repository:
 git clone <repository-url>
 cd inventory-system
-
+```
+```
 Install dependencies:
 npm install
-
+```
+```
 Buat file .env di root folder:
 DB_USERNAME=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=inventory_db
 DB_HOST=127.0.0.1
 JWT_SECRET=your_jwt_secret
-
+```
+```
 Jalankan migration Sequelize:
 npx sequelize-cli db:migrate
-
+```
+```
 Jalankan server:
 node app.js
+```
