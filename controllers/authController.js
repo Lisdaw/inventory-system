@@ -19,6 +19,7 @@ exports.login = async (req, res) => {
   res.redirect('/dashboard');
 };
 
+
 exports.logout = (req, res) => {
   res.clearCookie('token'); 
   res.redirect('/login');   
