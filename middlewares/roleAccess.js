@@ -22,3 +22,8 @@ exports.managerOnly = (req, res, next) => {
   if (req.user.role !== 'manager') return res.status(403).send('Forbidden');
   next();
 };
+
+exports.admin = (req, res, next) => {
+  if (req.user.role !== 'admin') return res.status(403).send('Forbidden');
+  next();
+};

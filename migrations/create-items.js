@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      item_name: {
+      nama_barang: {
         type: Sequelize.STRING
       },
       category: {

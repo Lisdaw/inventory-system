@@ -1,0 +1,14 @@
+buat dulu file migration baru : 
+npx sequelize-cli migration:generate --name rename-item-fields
+
+lalu difile rename(diupnya saja):
+async up(queryInterface, Sequelize) {
+    await queryInterface.renameColumn('Items', 'name', 'item_name');
+    await queryInterface.renameColumn('Items', 'cost', 'price');
+  },
+
+
+lalu jalankan migrasi:
+npx sequelize-cli db:migrate
+
+(satu file rename satu kali perubahan)

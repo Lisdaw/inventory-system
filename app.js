@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 
 const verifyToken = require('./middlewares/verifyToken');
+const setUser = require('./middlewares/setUser');
 
 const app = express();
 
@@ -16,16 +17,21 @@ app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 
-
-app.use('/', authRoutes); 
-
+// --------------------
+// Public routes
+// --------------------
+app.use('/', authRoutes); // login + logout
 app.get('/', (req, res) => res.redirect('/login'));
 
-app.use('/dashboard', verifyToken,  itemRoutes);
-app.use('/add', verifyToken,  itemRoutes);
-app.use('/edit', verifyToken,  itemRoutes);
-app.use('/delete', verifyToken,  itemRoutes);
 
+app.use('/dashboard', verifyToken, setUser, itemRoutes);
+app.use('/add', verifyToken, setUser, itemRoutes);
+app.use('/edit', verifyToken, setUser, itemRoutes);
+app.use('/delete', verifyToken, setUser, itemRoutes);
+
+// --------------------
+// Start server
+// --------------------
 sequelize.authenticate()
   .then(() => {
     console.log('Database connected');
