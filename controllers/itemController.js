@@ -5,7 +5,10 @@ exports.dashboard = async (req, res) => {
   res.render('dashboard', { items, user: req.user });
 };
 
-exports.formAdd = (req, res) => res.render('addItem');
+exports.formAdd = (req, res) => {
+  console.log('USER ADD:', req.user); 
+  res.render('addItem', { user: req.user });
+};
 
 exports.createItem = async (req, res) => {
   await Item.create({
@@ -17,7 +20,7 @@ exports.createItem = async (req, res) => {
 
 exports.formEdit = async (req, res) => {
   const item = await Item.findByPk(req.params.id);
-  res.render('editItem', { item });
+  res.render('editItem', { item, user: req.user });
 };
 
 exports.updateItem = async (req, res) => {

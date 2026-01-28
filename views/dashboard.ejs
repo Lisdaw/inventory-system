@@ -1,44 +1,70 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard</title>
-  <link rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-</head>
-<body class="container mt-4">
-<h3>Dashboard</h3>
-<p>Login sebagai: <%= user.username %> (Role: <%= user.role %>)</p>
+<%- include('partials/header', { user }) %>
 
-<% if (user.role==='manager'){ %>
-<a href="/add" class="btn btn-success mb-3">Tambah Barang</a>
-<% } %>
+<div class="card shadow-sm">
+  <div class="card-header bg-white d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">
+      <i class="bi bi-table"></i> Data Barang
+    </h5>
 
-<table class="table table-bordered table-striped">
-<thead class="table-dark">
-<tr><th>Nama</th><th>Kategori</th><th>Harga</th><th>Stok</th><th>Min Stok</th><th>Lokasi</th><th>Aksi</th></tr>
-</thead>
-<tbody>
-<% items.forEach(i=>{ 
-   let rowClass = i.stock_qty<=i.min_stock ? (i.stock_qty<=i.min_stock/2 ? 'table-danger' : 'table-warning') : '';
-%>
-<tr class="<%= rowClass %>">
-<td><%= i.item_name %></td>
-<td><%= i.category %></td>
-<td>Rp <%= i.price %></td>
-<td><%= i.stock_qty %></td>
-<td><%= i.min_stock %></td>
-<td><%= i.storage_location %></td>
-<td>
-<a href="/edit/<%= i.id %>" class="btn btn-sm btn-primary">Edit</a>
-<% if(user.role==='manager'){ %>
-<form action="/delete/<%= i.id %>" method="POST" style="display:inline">
-<button class="btn btn-sm btn-danger" onclick="return confirm('Discontinue barang ini?')">Hapus</button>
-</form>
-<% } %>
-</td>
-</tr>
-<% }) %>
-</tbody>
-</table>
-</body>
-</html>
+    <% if (user.role === 'manager') { %>
+      <a href="/add" class="btn btn-success btn-sm">
+        <i class="bi bi-plus-circle"></i> Tambah Barang
+      </a>
+    <% } %>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-hover table-bordered align-middle">
+      <thead class="table-light">
+        <tr class="text-center">
+          <th>Nama</th>
+          <th>Kategori</th>
+          <th>Harga</th>
+          <th>Stok</th>
+          <th>Min</th>
+          <th>Lokasi</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      <% items.forEach(i => { %>
+        <tr class="<%= i.stock_qty <= i.min_stock ? 'table-warning' : '' %>">
+          <td><strong><%= i.item_name %></strong></td>
+          <td><span class="badge bg-secondary"><%= i.category %></span></td>
+          <td>Rp <%= i.price.toLocaleString() %></td>
+
+          <td class="text-center">
+            <% if (i.stock_qty <= i.min_stock) { %>
+              <span class="badge bg-danger"><%= i.stock_qty %></span>
+            <% } else { %>
+              <span class="badge bg-success"><%= i.stock_qty %></span>
+            <% } %>
+          </td>
+
+          <td class="text-center"><%= i.min_stock %></td>
+          <td><%= i.storage_location %></td>
+
+          <td class="text-center">
+            <a href="/edit/<%= i.id %>" class="btn btn-sm btn-primary">
+              <i class="bi bi-pencil-square"></i>
+            </a>
+
+            <% if (user.role === 'manager') { %>
+              <form action="/delete/<%= i.id %>" method="POST" class="d-inline">
+                <button class="btn btn-sm btn-danger"
+                  onclick="return confirm('Discontinue barang ini?')">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
