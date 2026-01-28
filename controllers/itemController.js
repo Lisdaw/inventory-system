@@ -1,7 +1,7 @@
 const { Item } = require('../models');
 
 exports.dashboard = async (req, res) => {
-  const items = await Item.findAll({ where: { is_active: true } });
+  const items = await Item.findAll({ where: { is_aktif: true } });
   res.render('dashboard', { items, user: req.user });
 };
 
@@ -33,7 +33,7 @@ exports.updateItem = async (req, res) => {
 
 exports.deleteItem = async (req, res) => {
   await Item.update(
-    { is_active: false, updated_by: req.user.username },
+    { is_aktif: false, updated_by: req.user.username },
     { where: { id: req.params.id } }
   );
   res.redirect('/dashboard');

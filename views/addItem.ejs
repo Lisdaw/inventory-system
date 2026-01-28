@@ -10,12 +10,12 @@
     <form method="POST" action="/dashboard/add" class="row g-3">
       <div class="col-md-6">
         <label class="form-label">Nama Barang</label>
-        <input name="item_name" class="form-control" required>
+        <input name="name" class="form-control" required>
       </div>
 
-      <div class="col-md-6">
-        <label class="form-label">Kategori</label>
-        <input name="category" class="form-control">
+            <div class="col-md-4">
+        <label class="form-label">Stok</label>
+        <input type="number" name="stock" class="form-control">
       </div>
 
       <div class="col-md-4">
@@ -24,18 +24,13 @@
       </div>
 
       <div class="col-md-4">
-        <label class="form-label">Stok</label>
-        <input type="number" name="stock_qty" class="form-control">
-      </div>
-
-      <div class="col-md-4">
         <label class="form-label">Minimum Stok</label>
         <input type="number" name="min_stock" class="form-control">
       </div>
 
       <div class="col-md-12">
-        <label class="form-label">Lokasi Rak</label>
-        <input name="storage_location" class="form-control">
+        <label class="form-label">Alert</label>
+        <input name="alert" class="form-control">
       </div>
 
       <div class="col-12 text-end">

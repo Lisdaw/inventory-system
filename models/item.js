@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     stock_qty: DataTypes.INTEGER,
     min_stock: DataTypes.INTEGER,
     storage_location: DataTypes.STRING,
-    is_active: DataTypes.BOOLEAN,
+    is_aktif: DataTypes.BOOLEAN,
     created_by: DataTypes.STRING,
     updated_by: DataTypes.STRING
   }, {
