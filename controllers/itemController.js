@@ -19,8 +19,8 @@ exports.createItem = async (req, res) => {
 };
 
 exports.formEdit = async (req, res) => {
-  const item = await Item.findByPk(req.params.id);
-  res.render('editItem', { item, user: req.user });
+  const items = await Item.findByPk(req.params.id);
+  res.render('editItem', { items, user: req.user });
 };
 
 exports.updateItem = async (req, res) => {

@@ -1,4 +1,19 @@
+const jwt = require('jsonwebtoken');
+
 module.exports = (req, res, next) => {
-  res.locals.user = req.user;
+  const token = req.cookies.token;
+  if (!token) {
+    req.user = null;
+    return next();
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded;
+  } catch (err) {
+    req.user = null;
+  }
+
   next();
 };
+

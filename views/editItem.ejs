@@ -6,35 +6,35 @@
   </div>
 
   <div class="card-body">
-    <form method="POST" action="/dashboard/edit/<%= item.id %>" class="row g-3">
+    <form method="POST" action="/dashboard/edit/<%= items.id %>" class="row g-3">
       <div class="col-md-6">
         <label class="form-label">Nama Barang</label>
-        <input name="item_name" value="<%= item.item_name %>" class="form-control">
+        <input name="item_name" value="<%= items.item_name %>" class="form-control">
       </div>
 
       <div class="col-md-6">
         <label class="form-label">Kategori</label>
-        <input name="category" value="<%= item.category %>" class="form-control">
+        <input name="category" value="<%= items.category %>" class="form-control">
       </div>
 
       <div class="col-md-4">
         <label class="form-label">Harga</label>
-        <input type="number" name="price" value="<%= item.price %>" class="form-control">
+        <input type="number" name="price" value="<%= items.price %>" class="form-control">
       </div>
 
       <div class="col-md-4">
         <label class="form-label">Stok</label>
-        <input type="number" name="stock_qty" value="<%= item.stock_qty %>" class="form-control">
+        <input type="number" name="stock_qty" value="<%= items.stock_qty %>" class="form-control">
       </div>
 
       <div class="col-md-4">
         <label class="form-label">Minimum Stok</label>
-        <input type="number" name="min_stock" value="<%= item.min_stock %>" class="form-control">
+        <input type="number" name="min_stock" value="<%= items.min_stock %>" class="form-control">
       </div>
 
       <div class="col-md-12">
         <label class="form-label">Lokasi Rak</label>
-        <input name="storage_location" value="<%= item.storage_location %>" class="form-control">
+        <input name="storage_location" value="<%= items.storage_location %>" class="form-control">
       </div>
 
       <div class="col-12 text-end">

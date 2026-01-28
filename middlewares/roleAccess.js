@@ -18,12 +18,20 @@ exports.login = async (req, res) => {
   res.redirect('/dashboard');
 };
 
+// hanya manager
 exports.managerOnly = (req, res, next) => {
+  if (!req.user) return res.status(401).send('Unauthorized');
   if (req.user.role !== 'manager') return res.status(403).send('Forbidden');
   next();
 };
 
-exports.admin = (req, res, next) => {
-  if (req.user.role !== 'admin') return res.status(403).send('Forbidden');
+// manager atau admin
+exports.managerOrAdmin = (req, res, next) => {
+  if (!req.user) return res.status(401).send('Unauthorized');
+  if (req.user.role !== 'manager' && req.user.role !== 'admin') {
+    return res.status(403).send('Forbidden');
+  }
   next();
 };
+
+

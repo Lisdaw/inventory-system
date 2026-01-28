@@ -17,21 +17,14 @@ app.use(cookieParser());
 
 app.set('view engine', 'ejs');
 
-// --------------------
-// Public routes
-// --------------------
-app.use('/', authRoutes); // login + logout
+app.use('/', authRoutes); 
 app.get('/', (req, res) => res.redirect('/login'));
-
 
 app.use('/dashboard', verifyToken, setUser, itemRoutes);
 app.use('/add', verifyToken, setUser, itemRoutes);
 app.use('/edit', verifyToken, setUser, itemRoutes);
 app.use('/delete', verifyToken, setUser, itemRoutes);
 
-// --------------------
-// Start server
-// --------------------
 sequelize.authenticate()
   .then(() => {
     console.log('Database connected');
